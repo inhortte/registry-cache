@@ -1,0 +1,8 @@
+node_modules/**
+public/js/**
+etc/**
+dist
+.tmp
+.sass-cache
+*~
+server/**

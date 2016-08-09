@@ -1,0 +1,34 @@
+{
+  "name": "registry-cache",
+  "version": "1.0.0",
+  "description": "A redis store for registry notifications",
+  "main": "server/dredache.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/inhortte/registry-cache.git"
+  },
+  "keywords": [
+    "docker",
+    "redis",
+    "registry"
+  ],
+  "author": "Bobbus Mustelidus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inhortte/registry-cache/issues"
+  },
+  "homepage": "https://github.com/inhortte/registry-cache#readme",
+  "dependencies": {
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-preset-react-es2015": "^1.2.0",
+    "del": "^2.2.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "hapi": "^14.1.0",
+    "ioredis": "^2.2.0"
+  }
+}
