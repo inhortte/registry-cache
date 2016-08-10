@@ -15,7 +15,6 @@ const redis = new Redis(redisOpts);
 
 export const update = events => {
   let reptagStats = events.reduce((stats, event) => {
-    console.log(`\nevent.id: ${event.id}\nevent.action: ${event.action}\n\n`);
     if(stats.repository === undefined) {
       stats['repository'] = event.target.repository;
     }

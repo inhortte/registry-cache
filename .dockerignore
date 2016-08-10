@@ -1,6 +1,8 @@
 node_modules/**
 .git/**
 server/**
+registry-volume/**
+redis-data/**
 public/js/**
 public/css/**
 *~

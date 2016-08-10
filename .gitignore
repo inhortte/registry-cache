@@ -6,3 +6,5 @@ dist
 .sass-cache
 *~
 server/**
+registry-volume/**
+redis-data/**

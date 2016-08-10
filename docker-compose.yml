@@ -3,8 +3,6 @@ services:
   registry-cache:
     image: registry-cache
     container_name: registry-cache
-    ports:
-      - "3049:3049"
     depends_on:
       - redis
       - registry
@@ -15,7 +13,11 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /home/polaris/rummaging_round/node.js/docker/registry-cache/registry-config.yml:/etc/docker/registry/config.yml
+      - ./registry-config.yml:/etc/docker/registry/config.yml
+      - ./registry-volume:/var/lib/registry
   redis:
     image: redis
     container_name: registry-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - ./redis-data:/data
