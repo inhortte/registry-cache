@@ -6,6 +6,8 @@ services:
     depends_on:
       - redis
       - registry
+    volumes:
+      - ./thurk:/opt/app
   registry:
     image: registry:2
     restart: always

@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var nodemon = require('gulp-nodemon');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
@@ -6,7 +7,7 @@ var del = require('del');
 var path = require('path');
 
 var paths = {
-  serverSrc: 'src/server/**/*.js',
+  serverSrc: 'src/serv/**/*.js',
   serverDest: 'server'
 };
 
@@ -44,5 +45,16 @@ gulp.task('sclean', cleanServer);
 gulp.task('server', server);
 gulp.task('buildServer', buildServer);
 gulp.task('swatch', swatch);
+gulp.task('corre', function() {
+  buildServer();
+  setTimeout(function() {
+    nodemon({
+      ignore: ['node_modules/', 'server/**'],
+      script: './server/dreadache.js',
+      tasks: ['buildServer'],
+      delay: 2
+    });
+  }, 2000);
+});
 
-gulp.task('default', swatch);
+// gulp.task('default', 'corre');

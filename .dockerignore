@@ -1,8 +1,10 @@
-node_modules/**
+thurk/node_modules/**
 .git/**
-server/**
+.gitignore
+docker-compose.yml
+thurk/server/**
 registry-volume/**
 redis-data/**
-public/js/**
-public/css/**
+thurk/public/js/**
+thurk/public/css/**
 *~

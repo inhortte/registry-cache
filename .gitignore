@@ -1,10 +1,8 @@
-node_modules/**
-public/js/**
-etc/**
-dist
+thurk/node_modules/**
+thurk/public/js/**
 .tmp
 .sass-cache
 *~
-server/**
+thurk/server/**
 registry-volume/**
 redis-data/**

@@ -45,5 +45,7 @@ export const update = events => {
   };
   redis.hmset(key,
               'last_update', reptagStats.timestamp,
-              'size', reptagStats.size);
+              'size', reptagStats.size).then(res => {
+                console.log(`${key} thurked`);
+              });;
 };
