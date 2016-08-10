@@ -1,9 +1,7 @@
 'use strict';
 
 import Hapi from 'hapi';
-import Redis from 'ioredis';
-
-const redis = new Redis();
+import { update } from './store';
 
 const server = new Hapi.Server();
 server.connection({
@@ -14,7 +12,7 @@ server.route({
   method: 'POST',
   path: '/revent',
   handler: (req, reply) => {
-    console.log(JSON.stringify(req.payload));
+    update(req.payload.events);
     reply('beat me senseless');
   }
 });
