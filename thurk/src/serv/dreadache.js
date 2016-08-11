@@ -31,7 +31,6 @@ server.route({
   }
 });
 
-/*
 server.route({
   method: 'POST',
   path: '/revent',
@@ -40,7 +39,6 @@ server.route({
     reply('beat me senseless');
   }
 });
-*/
 
 server.start(err => {
   if(err) { throw err; }
