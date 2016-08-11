@@ -31,6 +31,7 @@
     "gulp-nodemon": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.9",
     "hapi": "^14.1.0",
     "inert": "^4.0.1",
     "ioredis": "^2.2.0",

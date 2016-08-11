@@ -24,7 +24,7 @@ export const update = events => {
     stats['timestamp'] = event.timestamp;
     let _tag = event.target.tag;
     if(_tag !== undefined) {
-      redis.sadd(stats.repository, _tag);
+      redis.sadd(`image:${stats.repository}`, _tag);
       stats['tag'] = _tag;
     }
     stats['size'] = stats['size'] + event.target.size;
@@ -32,7 +32,8 @@ export const update = events => {
   }, {
     size: 0
   });
-  let key = `${reptagStats.repository}:${reptagStats.tag}`;
+  redis.sadd('images', reptagStats.repository);
+  let key = `image:${reptagStats.repository}:${reptagStats.tag}`;
   switch(reptagStats.action){
   case "pull":
     redis.hincrby(key, 'pulls', 1);
