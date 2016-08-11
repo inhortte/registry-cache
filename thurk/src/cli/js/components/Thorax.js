@@ -1,13 +1,30 @@
 import React, { PropTypes } from 'react';
-import { Panel } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 const Thorax = () => {
   return (
-    <div>
-      <Panel>
-        El día hace que podía vomitar.
-      </Panel>
-    </div>
+    <Table responsive bordered hover striped>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Tag</th>
+          <th>Size</th>
+          <th>Pulls</th>
+          <th>Pushes</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>fortune-whalesay</td>
+          <td>thurk</td>
+          <td>09380</td>
+          <td>3</td>
+          <td>2</td>
+          <td>X</td>
+        </tr>
+      </tbody>
+    </Table>
   );
 };
 

@@ -7,6 +7,7 @@ import registryApp from './reducers';
 import VHead from './containers/VHead';
 import Thorax from './components/Thorax';
 import Abdomen from './components/Abdomen';
+import { Row, Col } from 'react-bootstrap';
 
 const store = createStore(registryApp, applyMiddleware(thunk));
 
@@ -17,9 +18,13 @@ class RegistryCache extends React.Component {
   render() {
     return (
       <div>
-        <VHead />
-        <Thorax />
-        <Abdomen />
+        <Row>
+          <Col xs={12} sm={10} md={8} smPush={1} mdPush={2}>
+            <VHead />
+            <Thorax />
+            <Abdomen />
+          </Col>
+        </Row>
       </div>
     );
   }

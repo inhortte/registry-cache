@@ -1,4 +1,4 @@
 export const localServer = {
-  serverName: () => document.url,
+  serverName: document.URL,
   port: 3049
 };
