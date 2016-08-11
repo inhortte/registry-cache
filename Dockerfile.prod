@@ -13,7 +13,8 @@ RUN cp /opt/app/package.json /tmp/package.json \
 
 WORKDIR /opt/app
 RUN gulp buildServer
+    && gulp buildClient
 
 EXPOSE 3049
 
-CMD ["/usr/bin/gulp", "corre"]
+ENTRYPOINT ["node", "./server/dreadache.js"]
