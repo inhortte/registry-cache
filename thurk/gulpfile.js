@@ -83,7 +83,7 @@ function swatch() {
   gulp.watch([paths.serverSrc], buildServer);
 }
 
-var buildAll = gulp.parallel(buildServer, buildClient);
+var watchAll = gulp.parallel(swatch, cwatch);
 
 /*
  * TASKS
@@ -94,12 +94,14 @@ gulp.task('server', server);
 gulp.task('buildServer', buildServer);
 gulp.task('swatch', swatch);
 gulp.task('corre', function() {
-  buildAll();
+  gulp.parallel(buildServer, buildClient);
+  swatch();
+  cwatch();
   setTimeout(function() {
     nodemon({
-      ignore: ['node_modules/**', 'src/**'],
+      ignore: ['node_modules/**', 'src/cli/**', 'public/**'],
       script: './server/dreadache.js',
-      tasks: ['buildServer'],
+//      tasks: ['buildServer'],
       delay: 5
     });
   }, 5000);

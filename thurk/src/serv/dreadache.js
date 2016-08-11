@@ -19,6 +19,8 @@ server.connection({
 });
 server.register(Inert, () => {});
 
+/* thurk */
+
 server.route({
   method: 'GET',
   path: '/{param*}',
