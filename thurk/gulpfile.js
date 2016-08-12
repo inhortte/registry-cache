@@ -21,11 +21,11 @@ var paths = {
  */
 
 function cleanClient(cb) {
-  del([path.join(paths.clientJsDest, '**/*.js'),
-       path.join(paths.clientCssDest, '**/*.css')]).then(function(ps) {
-         console.log('Expunged:\n' + ps.join('\n'));
-         cb();
-       });
+  return del([path.join(paths.clientJsDest, '**/*.js'),
+              path.join(paths.clientCssDest, '**/*.css')]).then(function(ps) {
+                console.log('Expunged:\n' + ps.join('\n'));
+                cb();
+              });
 }
 
 function babelifyClient() {
@@ -54,7 +54,7 @@ function bfDev() {
 }
 var buildClient = gulp.series(cleanClient, gulp.parallel(babelifyClient, css), bfDev);
 function cwatch() {
-  gulp.watch([paths.clientJsSrc, paths.clientCssSrc], buildClient);
+  return gulp.watch([paths.clientJsSrc, paths.clientCssSrc], buildClient);
 }
 
 /*
@@ -80,7 +80,7 @@ function server() {
 
 var buildServer = gulp.series(cleanServer, server);
 function swatch() {
-  gulp.watch([paths.serverSrc], buildServer);
+  return gulp.watch([paths.serverSrc], buildServer);
 }
 
 var watchAll = gulp.parallel(swatch, cwatch);
@@ -93,18 +93,18 @@ gulp.task('sclean', cleanServer);
 gulp.task('server', server);
 gulp.task('buildServer', buildServer);
 gulp.task('swatch', swatch);
-gulp.task('corre', function() {
-  gulp.parallel(buildServer, buildClient);
-  swatch();
-  cwatch();
-  setTimeout(function() {
-    nodemon({
-      ignore: ['node_modules/**', 'src/cli/**', 'public/**'],
-      script: './server/dreadache.js',
-//      tasks: ['buildServer'],
-      delay: 5
-    });
-  }, 5000);
-});
+gulp.task('buildClient', buildClient);
+gulp.task('cwatch', cwatch);
+gulp.task('corre', gulp.series('buildServer', 'buildClient',
+                               gulp.parallel('swatch', 'cwatch', function() {
+                                 setTimeout(function() {
+                                   nodemon({
+                                     ignore: ['node_modules/**', 'src/cli/**', 'public/**'],
+                                     script: './server/dreadache.js',
+                                     //      tasks: ['buildServer'],
+                                     delay: 5
+                                   });
+                                 }, 5000);
+                               })));
 
 // gulp.task('default', 'corre');

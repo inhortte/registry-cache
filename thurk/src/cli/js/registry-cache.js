@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import registryApp from './reducers';
 import VHead from './containers/VHead';
-import Thorax from './components/Thorax';
+import VThorax from './containers/VThorax';
 import Abdomen from './components/Abdomen';
 import { Row, Col } from 'react-bootstrap';
 
@@ -21,7 +21,7 @@ class RegistryCache extends React.Component {
         <Row>
           <Col xs={12} sm={10} md={8} smPush={1} mdPush={2}>
             <VHead />
-            <Thorax />
+            <VThorax />
             <Abdomen />
           </Col>
         </Row>

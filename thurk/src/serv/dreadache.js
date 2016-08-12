@@ -3,7 +3,7 @@
 import Hapi from 'hapi';
 import Inert from 'inert';
 import path from 'path';
-import { update } from './store';
+import { update, query } from './store';
 
 const server = new Hapi.Server({
   connections: {
@@ -19,8 +19,6 @@ server.connection({
 });
 server.register(Inert, () => {});
 
-/* thurk */
-
 server.route({
   method: 'GET',
   path: '/{param*}',
@@ -32,13 +30,23 @@ server.route({
     }
   }
 });
-
 server.route({
   method: 'POST',
   path: '/revent',
   handler: (req, reply) => {
     update(req.payload.events);
     reply('beat me senseless');
+  }
+});
+server.route({
+  method: 'POST',
+  path: '/rquery',
+  handler: (req, reply) => {
+    console.log(`rquery called, vole...`);
+    query().then(res => {
+      console.log(`RESPONSE:\n${JSON.stringify(res)}`);
+      reply(res);
+    });
   }
 });
 

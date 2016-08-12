@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import images from './images';
 
 const registryApp = combineReducers({
-  /* thurk */
+  images
 });
 
 export default registryApp;

@@ -14,9 +14,8 @@ RUN apk update && apk add git \
 VOLUME ["/opt/app"]
 WORKDIR /opt/app
 
-# RUN gulp buildServer
+# RUN npm install
 
 EXPOSE 3049
 
-ENTRYPOINT ["node"]
-CMD ["/usr/bin/gulp", "corre"]
+ENTRYPOINT ["bin/entrypoint.sh"]

@@ -1,6 +1,7 @@
 'use strict';
 
 import Redis from 'ioredis';
+import R from 'ramda';
 
 let redisOpts = {
   port: 6379
@@ -14,6 +15,7 @@ if(process.env.NO_DOCKER) {
 const redis = new Redis(redisOpts);
 
 export const update = events => {
+  console.log(`registry update called...`);
   let reptagStats = events.reduce((stats, event) => {
     if(stats.repository === undefined) {
       stats['repository'] = event.target.repository;
@@ -50,3 +52,46 @@ export const update = events => {
                 console.log(`${key} thurked`);
               });;
 };
+
+/*
+ * Return value:
+ * {
+ *   images: {
+ *     image-name: {
+ *       tag-name: {
+ *         last_update: ...,
+ *         pulls: ...,
+ *         pushes: ...,
+ *         size: ...
+ *       }, ...
+ *     }, ...
+ *   }
+ * }
+ */
+export const query = () => new Promise((resolve, reject) => {
+  const imageStats = (iName, tName) => new Promise((resolve, reject) => {
+    let key = `image:${iName}:${tName}`;
+    Promise.all([
+      redis.hget(key, 'last_update'),
+      redis.hget(key, 'size'),
+      redis.hget(key, 'pushes'),
+      redis.hget(key, 'pulls')
+    ]).then(stats => {
+      resolve(R.zipObj([tName], [ R.zipObj(['last_update', 'size', 'pushes', 'pulls'], stats) ]));
+    });
+  });
+
+  const imageTags = (iName) => new Promise((resolve, reject) => {
+    redis.smembers(`image:${iName}`).then(tagSet => {
+      Promise.all(tagSet.map(tName => {
+        return imageStats(iName, tName);
+      })).then(tStats => {
+        resolve(R.zipObj([iName], [ tStats ]));
+      });
+    });
+  });
+
+  redis.smembers('images')
+    .then(imageSet => Promise.all(imageSet.map((iName) => imageTags(iName)))
+          .then(images => resolve(images)));
+});
