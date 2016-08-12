@@ -15,7 +15,7 @@ const store = createStore(registryApp, applyMiddleware(thunk));
 class RegistryCache extends React.Component {
   componentDidMount() {
     let dispatch = this.props.dispatch;
-    dispatch(queryThunk());
+    // dispatch(queryThunk);
   }
   render() {
     return (

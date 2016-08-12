@@ -1,7 +1,20 @@
 import React, { PropTypes } from 'react';
 import { Table, Button } from 'react-bootstrap';
 
-const Thorax = ({ serverName, getImages, images }) => {
+const Thorax = ({ serverName, getImages, imageArray }) => {
+  let imageRows = imageArray.map(iRow => {
+    let key = `${iRow[0]}:${iRow[1]}`;
+    return (
+      <tr key={key}>
+        <td>{iRow[0]}</td>
+        <td>{iRow[1]}</td>
+        <td>{iRow[2]['size']}</td>
+        <td>{iRow[2]['pulls'] || 'none'}</td>
+        <td>{iRow[2]['pushes'] || 'none'}</td>
+        <td>X</td>
+      </tr>
+    );
+  });
   return (
     <div>
       <Button onClick={getImages} bsStyle={'danger'}>
@@ -19,14 +32,7 @@ const Thorax = ({ serverName, getImages, images }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>fortune-whalesay</td>
-            <td>thurk</td>
-            <td>09380</td>
-            <td>3</td>
-            <td>2</td>
-            <td>X</td>
-          </tr>
+          {imageRows}
         </tbody>
       </Table>
     </div>

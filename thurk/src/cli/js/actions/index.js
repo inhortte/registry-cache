@@ -9,6 +9,6 @@ export const queryThunk = (dispatch, getState) => {
   queryServer().then(res => {
     dispatch(setImages(res.images));
   }).catch(err => {
-    console.log(`error in queryThunk: ${JSON.stringify(err)}`);
+    if(err) throw err;
   });
 };

@@ -4,12 +4,19 @@ import Thorax from '../components/Thorax';
 import { queryThunk } from '../actions';
 import { localServer } from '../config';
 
+/*
+ * imageArray becomes:
+ * [ [ imageName, imageTag, imageStats ], ... ]
+ */
 const mapStateToProps = (state) => {
   let imageMap = state.images.images;
-
+  let imageArray = R.reduce(R.concat, [],
+                            R.map(iName => R.map(tName => new Array(iName, tName, imageMap[iName][tName]),
+                                                 R.keys(imageMap[iName])),
+                                  R.keys(imageMap)));
   return {
     serverName: localServer.serverName,
-    images: state.images.images
+    imageArray: imageArray
   };
 };
 
