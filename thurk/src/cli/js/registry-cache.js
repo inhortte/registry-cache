@@ -8,12 +8,14 @@ import VHead from './containers/VHead';
 import VThorax from './containers/VThorax';
 import Abdomen from './components/Abdomen';
 import { Row, Col } from 'react-bootstrap';
+import { queryThunk } from './actions';
 
 const store = createStore(registryApp, applyMiddleware(thunk));
 
 class RegistryCache extends React.Component {
   componentDidMount() {
     let dispatch = this.props.dispatch;
+    dispatch(queryThunk());
   }
   render() {
     return (

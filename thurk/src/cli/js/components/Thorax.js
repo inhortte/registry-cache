@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Table, Button } from 'react-bootstrap';
 
-const Thorax = ({ serverName, getImages }) => {
+const Thorax = ({ serverName, getImages, images }) => {
   return (
     <div>
       <Button onClick={getImages} bsStyle={'danger'}>

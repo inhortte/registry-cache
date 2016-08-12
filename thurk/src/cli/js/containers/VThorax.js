@@ -1,11 +1,15 @@
+import R from 'ramda';
 import { connect } from 'react-redux';
 import Thorax from '../components/Thorax';
 import { queryThunk } from '../actions';
 import { localServer } from '../config';
 
 const mapStateToProps = (state) => {
+  let imageMap = state.images.images;
+
   return {
-    serverName: localServer.serverName
+    serverName: localServer.serverName,
+    images: state.images.images
   };
 };
 

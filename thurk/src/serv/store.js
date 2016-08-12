@@ -86,12 +86,12 @@ export const query = () => new Promise((resolve, reject) => {
       Promise.all(tagSet.map(tName => {
         return imageStats(iName, tName);
       })).then(tStats => {
-        resolve(R.zipObj([iName], [ tStats ]));
+        resolve(R.zipObj([iName], [ R.mergeAll(tStats) ]));
       });
     });
   });
 
   redis.smembers('images')
-    .then(imageSet => Promise.all(imageSet.map((iName) => imageTags(iName)))
-          .then(images => resolve(images)));
+    .then(imageSet => Promise.all(imageSet.map(iName => imageTags(iName)))
+          .then(images => resolve({ images: R.mergeAll(images) })));
 });
