@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Row, Col, Table, Button } from 'react-bootstrap';
 
-const Thorax = ({ serverName, getImages, imageArray }) => {
+const Thorax = ({ serverName, getImages, imageArray, delImage }) => {
   let imageRows = imageArray.map(iRow => {
     let key = `${iRow[0]}:${iRow[1]}`;
     return (
@@ -11,30 +11,36 @@ const Thorax = ({ serverName, getImages, imageArray }) => {
         <td>{iRow[2]['size']}</td>
         <td>{iRow[2]['pulls'] || 'none'}</td>
         <td>{iRow[2]['pushes'] || 'none'}</td>
-        <td>X</td>
+        <td><a href="#" onClick={delImage}>X</a></td>
       </tr>
     );
   });
   return (
     <div>
-      <Button onClick={getImages} bsStyle={'danger'}>
-        Death!
-      </Button>
-      <Table responsive bordered hover striped>
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Tag</th>
-            <th>Size</th>
-            <th>Pulls</th>
-            <th>Pushes</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {imageRows}
-        </tbody>
-      </Table>
+      <Row>
+        <Col smPush={11} sm={1}>
+          <Button onClick={getImages} bsStyle={'danger'}>
+            Refresh!
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Table responsive bordered hover striped>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Tag</th>
+              <th>Size</th>
+              <th>Pulls</th>
+              <th>Pushes</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {imageRows}
+          </tbody>
+        </Table>
+      </Row>
     </div>
   );
 };

@@ -12,3 +12,6 @@ export const queryThunk = (dispatch, getState) => {
     if(err) throw err;
   });
 };
+
+export const delImage = () => {
+};
