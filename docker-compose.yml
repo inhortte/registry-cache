@@ -8,6 +8,8 @@ services:
       - registry
     volumes:
       - ./thurk:/opt/app
+    ports:
+      - "3049:3049"
   registry:
     image: registry:2
     restart: always
