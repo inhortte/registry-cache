@@ -1,4 +1,4 @@
 export const localServer = {
-  serverName: document.URL,
+  serverName: document.URL.replace(/#/g, ''),
   port: 3049
 };
