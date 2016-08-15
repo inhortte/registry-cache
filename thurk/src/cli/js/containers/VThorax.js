@@ -1,7 +1,7 @@
 import R from 'ramda';
 import { connect } from 'react-redux';
 import Thorax from '../components/Thorax';
-import { queryThunk, delImage } from '../actions';
+import { queryThunk, deleteThunk } from '../actions';
 import { localServer } from '../config';
 
 /*
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getImages: () => dispatch(queryThunk),
-    delImage: () => dispatch(delImage())
+    delImage: (iName, tName) => dispatch(deleteThunk(iName, tName))
   };
 };
 

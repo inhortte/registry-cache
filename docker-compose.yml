@@ -19,6 +19,8 @@ services:
     volumes:
       - ./registry-config.yml:/etc/docker/registry/config.yml
       - ./registry-volume:/var/lib/registry
+    environment:
+      - REGISTRY_STORAGE_DELETE_ENABLED=true
   redis:
     image: redis
     container_name: registry-redis

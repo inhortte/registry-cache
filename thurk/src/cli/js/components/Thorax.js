@@ -3,6 +3,10 @@ import { Row, Col, Table, Button } from 'react-bootstrap';
 
 const Thorax = ({ serverName, getImages, imageArray, delImage }) => {
   let imageRows = imageArray.map(iRow => {
+    /*
+     * iRow[0] -> image name
+     * iRow[1] -> tag name
+     */
     let key = `${iRow[0]}:${iRow[1]}`;
     return (
       <tr key={key}>
@@ -11,7 +15,7 @@ const Thorax = ({ serverName, getImages, imageArray, delImage }) => {
         <td>{iRow[2]['size']}</td>
         <td>{iRow[2]['pulls'] || 'none'}</td>
         <td>{iRow[2]['pushes'] || 'none'}</td>
-        <td><a href="#" onClick={delImage}>X</a></td>
+        <td><a href="#" onClick={() => delImage(iRow[0], iRow[1])}>X</a></td>
       </tr>
     );
   });

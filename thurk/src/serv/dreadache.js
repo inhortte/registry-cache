@@ -3,7 +3,7 @@
 import Hapi from 'hapi';
 import Inert from 'inert';
 import path from 'path';
-import { update, query } from './store';
+import { update, query, deleteImage } from './store';
 
 const server = new Hapi.Server({
   connections: {
@@ -34,7 +34,9 @@ server.route({
   method: 'POST',
   path: '/revent',
   handler: (req, reply) => {
-    update(req.payload.events);
+    if(req.payload) {
+      update(req.payload.events);
+    }
     reply('beat me senseless');
   }
 });
@@ -46,6 +48,20 @@ server.route({
     query().then(res => {
       console.log(`RESPONSE:\n${JSON.stringify(res)}`);
       reply(res);
+    });
+  }
+});
+server.route({
+  method: 'POST',
+  path: '/rdelete/{iName}/{tName}',
+  handler: (req, reply) => {
+    /*
+     * For now, deleteImage simply returns a boolean.
+     */
+    deleteImage(req.params.iName, req.params.tName).then(res => {
+      reply({
+        status: res
+      });
     });
   }
 });
